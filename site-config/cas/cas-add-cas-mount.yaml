@@ -1,0 +1,34 @@
+# # this defines the volume and volumemount for CAS DISK CACHE location
+---
+apiVersion: builtin
+kind: PatchTransformer
+metadata:
+  name: cas-add-cas-mount
+patch: |-
+  - op: add
+    path: /spec/controllerTemplate/spec/volumes/-
+    value:
+      name: cas
+      hostPath:
+        path: /var/local-storage/cas
+        type: Directory
+  - op: add
+    path: /spec/controllerTemplate/spec/containers/0/volumeMounts/-
+    value:
+      name: cas
+      mountPath: /cas
+  - op: add
+    path: /spec/controllerTemplate/spec/containers/0/env/-
+    value:
+      name: CASENV_CAS_DISK_CACHE
+      value: "/cas/cache0"
+  - op: add
+    path: /spec/controllerTemplate/spec/containers/0/env/-
+    value:
+      name: CASENV_CAS_CONTROLLER_TEMP
+      value: "/cas/cache0"
+target:
+  version: v1alpha1
+  group: viya.sas.com
+  kind: CASDeployment
+  labelSelector: "sas.com/cas-server-default"

@@ -1,0 +1,8 @@
+---
+apiVersion: builtin
+kind: ConfigMapGenerator
+metadata:
+  name: input
+behavior: merge
+literals:
+  - IMAGE_REGISTRY=806364133413.dkr.ecr.us-east-1.amazonaws.com/sasviya-dev

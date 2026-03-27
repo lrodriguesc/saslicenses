@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sas-deployment-buildinfo
+data:
+  git-hash: "7b069571ab9b2edcfbe48c7a43310c99b632e74b"
+  timestamp: "2026-03-27T15:54:23Z"
+  deployment-tooling: "ansible"

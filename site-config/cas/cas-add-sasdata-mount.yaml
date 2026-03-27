@@ -1,0 +1,24 @@
+# This block of code is for mounting NFS persistentVolumeClaims and Data
+# Connectors for the CAS server.
+---
+apiVersion: builtin
+kind: PatchTransformer
+metadata:
+  name: cas-add-sasdata-mount
+patch: |-
+  - op: add
+    path: /spec/controllerTemplate/spec/volumes/-
+    value:
+      name: sasdata
+      persistentVolumeClaim:
+        claimName: sas-sasdata
+  - op: add
+    path: /spec/controllerTemplate/spec/containers/0/volumeMounts/-
+    value:
+      name: sasdata
+      mountPath: /sasdata
+target:
+  group: viya.sas.com
+  version: v1alpha1
+  kind: CASDeployment
+  name: .*

@@ -1,0 +1,31 @@
+# Copyright © 2020-2025, SAS Institute Inc., Cary, NC, USA. All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+---
+cacerts:
+config:
+  application:
+    sas.identities.providers.ldap.connection:
+      host: 10.2.207.203
+      password: Banco2026.
+      port: 389 
+      url: ldap://${sas.identities.providers.ldap.connection.host}:${sas.identities.providers.ldap.connection.port}
+      userDN: CN=SAS,DC=bancasqa,DC=com
+    sas.identities.providers.ldap.group:
+      baseDN: CN=GG_SAS_ACCESO,CN=Users,DC=bancasqa,DC=com
+      accountId: sAMAccountName 
+      member: member
+      memberOf: memberOf
+      objectClass: group
+      objectFilter: (objectClass=group)
+      searchFilter: (sAMAccountName={0})
+    sas.identities.providers.ldap.user:
+      baseDN: CN=Users,DC=bancasqa,DC=com
+      accountId: sAMAccountName
+      memberOf: memberOf
+      objectClass: person
+      objectFilter: (&(objectClass=user)(objectCategory=person)(memberOf=CN=GG_SAS_ACCESO,CN=Users,DC=bancasqa,DC=com)) 
+      searchFilter: (&(sAMAccountName={0})(memberOf=CN=GG_SAS_ACCESO,CN=Users,DC=bancasqa,DC=com)) 
+    sas.logon.initial.password: Password123
+  identities:
+    administrator: 'viya_admin'

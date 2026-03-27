@@ -1,0 +1,5 @@
+configMapGenerator:
+- name: sas-access-config
+  behavior: merge
+  envs:
+  - site-config/data-access/sas-access.properties
