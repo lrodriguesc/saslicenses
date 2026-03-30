@@ -1,8 +1,0 @@
----
-apiVersion: builtin
-kind: ConfigMapGenerator
-metadata:
-  name: ingress-input
-behavior: merge
-literals:
-  - INGRESS_HOST=sasipmqa.bi.com.gt
